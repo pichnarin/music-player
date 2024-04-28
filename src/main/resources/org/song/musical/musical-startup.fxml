@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="408.0" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.song.musical.MusicalController">
+   <Button fx:id="playButton" layoutX="83.0" layoutY="424.0" mnemonicParsing="false" onAction="#OnPlayButtonClick" text="Play" />
+   <Button fx:id="pauseButton" layoutX="181.0" layoutY="424.0" mnemonicParsing="false" onAction="#OnPauseButtonClick" text="Pause" />
+   <Button fx:id="stopButton" layoutX="281.0" layoutY="424.0" mnemonicParsing="false" onAction="#OnStopButtonClick" text="Stop" />
+   <Label layoutX="98.0" layoutY="95.0" text="Testing musical player ">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
+   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="8.0" layoutY="292.0" prefHeight="19.0" prefWidth="391.0" text="none">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Label>
+   <Button fx:id="OnChooseMusicButton" layoutX="141.0" layoutY="203.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Choose your mp3 file" />
+</AnchorPane>
