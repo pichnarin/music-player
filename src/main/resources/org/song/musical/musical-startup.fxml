@@ -14,7 +14,7 @@
          <Font size="21.0" />
       </font>
    </Label>
-   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="8.0" layoutY="292.0" prefHeight="19.0" prefWidth="391.0" text="none">
+   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="8.0" layoutY="292.0" prefHeight="19.0" prefWidth="391.0" text="none.mp3">
       <font>
          <Font size="13.0" />
       </font>

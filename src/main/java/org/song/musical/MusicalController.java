@@ -4,12 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class MusicalController {
+
+    private MediaPlayer mediaPlayer;
 
     @FXML
     private Label fileNameDisplay;
@@ -35,25 +38,27 @@ public class MusicalController {
         );
         File file = fileChooser.showOpenDialog(null);
         if (file != null){
-            String selectedFile = file.getName();
-            fileNameDisplay.setText(selectedFile);
-
+            String fullPathFileName = file.toURI().toString();
+            Media media = new Media(fullPathFileName);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setOnReady(() -> fileNameDisplay.setText(file.getName()));
         }
     }
 
     @FXML
     void OnPauseButtonClick(ActionEvent event) {
-
+        mediaPlayer.pause();
     }
 
     @FXML
     void OnPlayButtonClick(ActionEvent event) {
-
+        mediaPlayer.play();
     }
 
     @FXML
     void OnStopButtonClick(ActionEvent event) {
-
+        mediaPlayer.stop();
+        fileNameDisplay.setText("none.mp3");
     }
 
 }
