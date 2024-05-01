@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,10 +15,13 @@
          <Font size="21.0" />
       </font>
    </Label>
-   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="8.0" layoutY="292.0" prefHeight="19.0" prefWidth="391.0" text="none.mp3">
+   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="13.0" layoutY="281.0" prefHeight="19.0" prefWidth="391.0" text="none.mp3">
       <font>
          <Font size="13.0" />
       </font>
    </Label>
-   <Button fx:id="OnChooseMusicButton" layoutX="141.0" layoutY="203.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Choose your mp3 file" />
+   <Button fx:id="OnChooseMusicButton" layoutX="141.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Choose your mp3 file" />
+   <Slider fx:id="slider" layoutX="88.0" layoutY="337.0" prefHeight="14.0" prefWidth="241.0" />
+   <Label fx:id="minLabel" layoutX="38.0" layoutY="335.0" />
+   <Label fx:id="timeLabel" layoutX="336.0" layoutY="335.0" />
 </AnchorPane>
