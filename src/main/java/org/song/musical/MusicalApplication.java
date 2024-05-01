@@ -13,7 +13,7 @@ public class MusicalApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MusicalApplication.class.getResource("musical-startup.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 408, 583);
-        stage.setTitle("Musical Player");
+        stage.setTitle("The Musical Player");
         stage.centerOnScreen();
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/1834/1834342.png"));
         stage.setScene(scene);

@@ -20,8 +20,11 @@
          <Font size="13.0" />
       </font>
    </Label>
-   <Button fx:id="OnChooseMusicButton" layoutX="141.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Choose your mp3 file" />
+   <Button fx:id="OnChooseMusicButton" layoutX="141.0" layoutY="148.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Choose your mp3 file" />
    <Slider fx:id="slider" layoutX="88.0" layoutY="337.0" prefHeight="14.0" prefWidth="241.0" />
    <Label fx:id="minLabel" layoutX="38.0" layoutY="335.0" />
    <Label fx:id="timeLabel" layoutX="336.0" layoutY="335.0" />
+   <Button fx:id="playlistButton" layoutX="155.0" layoutY="199.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" text="Create a playlist" />
+   <Button fx:id="ForwardBtn" layoutX="226.0" layoutY="501.0" mnemonicParsing="false" text="Forward" />
+   <Button fx:id="BackwardBtn" layoutX="120.0" layoutY="501.0" mnemonicParsing="false" text="Backward" />
 </AnchorPane>

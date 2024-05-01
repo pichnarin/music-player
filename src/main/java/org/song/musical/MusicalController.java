@@ -1,6 +1,7 @@
 package org.song.musical;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,34 +11,36 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import javafx.collections.FXCollections;
 
 import java.io.File;
+import java.util.List;
 
 
 public class MusicalController {
+    private MediaPlayer mediaPlayer;
+    private final ObservableList<String> playlist = FXCollections.observableArrayList();
+    public int nextIndex;
+    @FXML
+    private Button ForwardBtn;
+    @FXML
+    private Button BackwardBtn;
+    @FXML
+    private Button playlistButton;
     @FXML
     private Slider slider;
-
     @FXML
     private Label minLabel;
-
     @FXML
     private Label timeLabel;
-
-    private MediaPlayer mediaPlayer;
-
     @FXML
     private Label fileNameDisplay;
-
     @FXML
     private Button pauseButton;
-
     @FXML
     private Button playButton;
-
     @FXML
     private Button stopButton;
-
     @FXML
     private Button OnChooseMusicButton;
 
@@ -45,13 +48,9 @@ public class MusicalController {
     public void OnChooseMusicButton(ActionEvent event){
         try{
             if(event.getSource() == OnChooseMusicButton){
-
                 FileChooser fileChooser = new FileChooser();
-
-                fileChooser.setTitle("Chooser your music");
-
+                fileChooser.setTitle("Chooser a music");
                 fileChooser.getExtensionFilters().addAll(
-
                         new FileChooser.ExtensionFilter("Mp3 files", "*.mp3")
 
                 );
@@ -73,25 +72,20 @@ public class MusicalController {
                                 mediaPlayer.play();
 
                                 slider.setMin(0);
-
                                 slider.setMax(mediaPlayer.getTotalDuration().toSeconds());
 
                                 minLabel.textProperty().bind(Bindings.createStringBinding(() ->
-
                                         timeFormat(mediaPlayer.getCurrentTime().toSeconds()),
-
                                         mediaPlayer.currentTimeProperty()
                                 ));
 
                                 timeLabel.textProperty().bind(Bindings.createStringBinding(() ->
-
                                                     timeFormat(mediaPlayer.getTotalDuration().toSeconds()),
-
                                                     mediaPlayer.totalDurationProperty()
-
                                 ));
 
                         slider.valueProperty().addListener((_, _, newValue) -> {
+
                             if (slider.isValueChanging()) {
                                 mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
                             }
@@ -109,11 +103,106 @@ public class MusicalController {
                         });
                     });
                 }
+            }else if(event.getSource() == playlistButton){
+                FileChooser playlistFile = new FileChooser();
+                playlistFile.setTitle("Choose a bunch of songs");
+                playlistFile.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("Mp3 files", "*.mp3")
+                );
+
+                //choose a list of files
+                List<File> selectedFile  = playlistFile.showOpenMultipleDialog(null);
+                if(selectedFile != null){
+                    for(File file : selectedFile){
+                        playlist.add(file.getAbsolutePath());
+                        //System.out.println(file.getPath());
+                    }
+                }
+
+                // play the first song in the playlist
+                assert selectedFile != null;
+                if(!selectedFile.isEmpty()){
+                    playTheFuckingSong(0);
+                }
             }
         }catch(Exception e){
-
             System.out.println(e.getCause().getMessage());
+        }
+    }
 
+    //play the next song in playlist
+    private void playTheFuckingSong(int indexOfSongInPlaylist){
+        try{
+
+            String songPath = playlist.get(indexOfSongInPlaylist);
+//            System.out.println(songPath);
+
+            Media media = new Media(new File(songPath).toURI().toString());
+
+            mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.setOnReady(() -> {
+
+                fileNameDisplay.setText(new File(songPath).getName());
+
+                mediaPlayer.play();
+
+                mediaPlayer.play();
+
+                slider.setMin(0);
+
+                slider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+
+                minLabel.textProperty().bind(Bindings.createStringBinding(() ->
+                                timeFormat(mediaPlayer.getCurrentTime().toSeconds()),
+                        mediaPlayer.currentTimeProperty()
+                ));
+
+                timeLabel.textProperty().bind(Bindings.createStringBinding(() ->
+                                timeFormat(mediaPlayer.getTotalDuration().toSeconds()),
+                        mediaPlayer.totalDurationProperty()
+                ));
+
+                slider.valueProperty().addListener((_, _, newValue) -> {
+
+                    if (slider.isValueChanging()) {
+                        mediaPlayer.seek(Duration.seconds(newValue.doubleValue()));
+                    }
+                });
+
+                mediaPlayer.currentTimeProperty().addListener((_, _, _) -> {
+                    if(!slider.isValueChanging()){
+                        slider.setValue(mediaPlayer.getCurrentTime().toSeconds());
+                    }
+                });
+
+                mediaPlayer.setOnEndOfMedia(() ->{
+                    //play the next song in the playlist
+                    //keep track of the current song index when the one before is ended
+                    nextIndex = (indexOfSongInPlaylist + 1) % playlist.size();
+                    playTheFuckingSong(nextIndex);
+                });
+
+                ForwardBtn.setOnAction(_ -> {
+                    mediaPlayer.stop();
+                    if(indexOfSongInPlaylist <= playlist.size() - 1){
+                        playTheFuckingSong((indexOfSongInPlaylist + 1) % playlist.size());
+//                        System.out.println(songPath);
+//                        System.out.println(indexOfSongInPlaylist);
+//                        System.out.println(new File(songPath));
+                    }
+                });
+
+                BackwardBtn.setOnAction(_ -> {
+                    mediaPlayer.stop();
+                    if(indexOfSongInPlaylist > 0) {
+                        playTheFuckingSong((indexOfSongInPlaylist - 1) % playlist.size());
+                    }
+                });
+            });
+
+        }catch(Exception e){
+            System.out.println("Error something i don't know");
         }
     }
 
