@@ -25,6 +25,16 @@ public class MusicalController {
     private RotateTransition rotateTransition;
     public int nextIndex;
     @FXML
+    private ImageView backward;
+    @FXML
+    private ImageView forward;
+    @FXML
+    private ImageView pause;
+    @FXML
+    private ImageView play;
+    @FXML
+    private ImageView stop;
+    @FXML
     private ImageView rotationDisk;
     @FXML
     private Button ForwardBtn;
@@ -75,6 +85,8 @@ public class MusicalController {
                                 fileNameDisplay.setText(file.getName());
 
                                 mediaPlayer.play();
+
+                                System.out.println("playing " + file.getName());
 
                                 rotateTransition = new RotateTransition(Duration.seconds(20), rotationDisk);
 
@@ -166,6 +178,8 @@ public class MusicalController {
 
                 mediaPlayer.play();
 
+                System.out.println("playing " + fileNameDisplay.getText());
+
                 rotateTransition = new RotateTransition(Duration.seconds(20), rotationDisk);
 
                 rotateTransition.setByAngle(360); // Rotate by 360 degrees
@@ -215,9 +229,7 @@ public class MusicalController {
                     rotateTransition.stop();
                     if(indexOfSongInPlaylist <= playlist.size() - 1){
                         playTheFuckingSong((indexOfSongInPlaylist + 1) % playlist.size());
-//                        System.out.println(songPath);
-//                        System.out.println(indexOfSongInPlaylist);
-//                        System.out.println(new File(songPath));
+                        System.out.println("go to" + new File(songPath).getName());
                     }
                 });
 
@@ -226,6 +238,7 @@ public class MusicalController {
                     rotateTransition.stop();
                     if(indexOfSongInPlaylist > 0) {
                         playTheFuckingSong((indexOfSongInPlaylist - 1) % playlist.size());
+                        System.out.println("back to" + new File(songPath).getName());
                     }
                 });
             });
@@ -246,6 +259,7 @@ public class MusicalController {
         if(event.getSource() == pauseButton){
             mediaPlayer.pause();
             rotateTransition.stop();
+            System.out.println("paused " + fileNameDisplay.getText());
         }
     }
 
@@ -254,6 +268,7 @@ public class MusicalController {
         if(event.getSource() == playButton){
             mediaPlayer.play();
             rotateTransition.play();
+            System.out.println("playing " + fileNameDisplay.getText());
         }
     }
 
@@ -263,6 +278,7 @@ public class MusicalController {
             mediaPlayer.stop();
             rotateTransition.stop();
             mediaPlayer.seek(Duration.seconds(0));
+            System.out.println("stopped " + fileNameDisplay.getText());
         }
     }
 

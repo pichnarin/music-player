@@ -12,26 +12,61 @@
    <ImageView fitHeight="583.0" fitWidth="408.0" layoutX="-1.0" layoutY="1.0">
       <Image url="@musicalBackground.jpg" />
    </ImageView>
-   <Button fx:id="playButton" layoutX="108.0" layoutY="474.0" mnemonicParsing="false" onAction="#OnPlayButtonClick" prefHeight="30.0" prefWidth="49.0" styleClass="controlButton" stylesheets="@style.css" text="Play" textFill="WHITE" />
-   <Button fx:id="pauseButton" layoutX="252.0" layoutY="476.0" mnemonicParsing="false" onAction="#OnPauseButtonClick" styleClass="controlButton" stylesheets="@style.css" text="Pause" textFill="WHITE" />
-   <Button fx:id="stopButton" layoutX="182.0" layoutY="476.0" mnemonicParsing="false" onAction="#OnStopButtonClick" styleClass="controlButton" stylesheets="@style.css" text="Stop" textFill="WHITE" />
+   <Button fx:id="playButton" layoutX="133.0" layoutY="492.0" mnemonicParsing="false" onAction="#OnPlayButtonClick" prefHeight="30.0" prefWidth="49.0" styleClass="controlButton" stylesheets="@style.css" textFill="WHITE">
+      <graphic>
+         <ImageView fx:id="play" fitHeight="25.0" fitWidth="25.0">
+            <image>
+               <Image url="@img/pause-button.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
+   <Button fx:id="pauseButton" layoutX="249.0" layoutY="492.0" mnemonicParsing="false" onAction="#OnPauseButtonClick" styleClass="controlButton" stylesheets="@style.css" textFill="WHITE">
+      <graphic>
+         <ImageView fx:id="pause" fitHeight="25.0" fitWidth="25.0">
+            <image>
+               <Image url="@img/play-button.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
+   <Button fx:id="stopButton" layoutX="192.0" layoutY="492.0" mnemonicParsing="false" onAction="#OnStopButtonClick" styleClass="controlButton" stylesheets="@style.css" textFill="WHITE">
+      <graphic>
+         <ImageView fx:id="stop" fitHeight="25.0" fitWidth="25.0">
+            <image>
+               <Image url="@img/stop-button.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
    <Label layoutX="82.0" layoutY="14.0" styleClass="welcomeTitle" stylesheets="@style.css" text="Testing musical player ">
       <font>
          <Font size="21.0" />
       </font>
    </Label>
-   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="17.0" layoutY="367.0" prefHeight="19.0" prefWidth="391.0" styleClass="songTitle" stylesheets="@style.css" text="none.mp3">
+   <Label fx:id="fileNameDisplay" alignment="CENTER" layoutX="17.0" layoutY="372.0" prefHeight="19.0" prefWidth="391.0" styleClass="songTitle" stylesheets="@style.css" text="none.mp3">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
-   <Button fx:id="OnChooseMusicButton" layoutX="23.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" styleClass="selectedAFile" stylesheets="@style.css" text="Choose your mp3 file" textFill="WHITE" />
-   <Slider fx:id="slider" layoutX="92.0" layoutY="412.0" prefHeight="14.0" prefWidth="241.0" stylesheets="@style.css" />
-   <Label fx:id="minLabel" layoutX="47.0" layoutY="410.0" />
-   <Label fx:id="timeLabel" layoutX="354.0" layoutY="410.0" />
-   <Button fx:id="playlistButton" layoutX="261.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" styleClass="selectedMultipleFile" stylesheets="@style.css" text="Create a playlist" textFill="WHITE" />
-   <Button fx:id="ForwardBtn" layoutX="233.0" layoutY="519.0" mnemonicParsing="false" styleClass="controlButton" stylesheets="@style.css" text="Forward" textFill="WHITE" />
-   <Button fx:id="BackwardBtn" layoutX="108.0" layoutY="519.0" mnemonicParsing="false" styleClass="controlButton" stylesheets="@style.css" text="Backward" textFill="WHITE" />
+   <Button fx:id="OnChooseMusicButton" layoutX="43.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" styleClass="selectedAFile" stylesheets="@style.css" text="choose a song" textFill="WHITE" />
+   <Slider fx:id="slider" layoutX="83.0" layoutY="428.0" prefHeight="14.0" prefWidth="241.0" stylesheets="@style.css" />
+   <Label fx:id="minLabel" layoutX="28.0" layoutY="426.0" styleClass="timeLabel" stylesheets="@style.css" text="00 : 00" />
+   <Label fx:id="timeLabel" layoutX="332.0" layoutY="426.0" styleClass="timeLabel" stylesheets="@style.css" text="00 : 00" />
+   <Button fx:id="playlistButton" layoutX="249.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnChooseMusicButton" styleClass="selectedMultipleFile" stylesheets="@style.css" text="Create a playlist" textFill="WHITE" />
+   <Button fx:id="ForwardBtn" layoutX="299.0" layoutY="492.0" mnemonicParsing="false" styleClass="controlButton" stylesheets="@style.css" textFill="WHITE">
+      <graphic>
+         <ImageView fx:id="forward" fitHeight="25.0" fitWidth="25.0">
+            <image>
+               <Image url="@img/forward-button.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
+   <Button fx:id="BackwardBtn" layoutX="76.0" layoutY="492.0" mnemonicParsing="false" styleClass="controlButton" stylesheets="@style.css" textFill="WHITE">
+      <graphic>
+         <ImageView fx:id="backward" fitHeight="25.0" fitWidth="25.0">
+            <image>
+               <Image url="@img/backward-button.png" />
+            </image>
+         </ImageView>
+      </graphic></Button>
    <ImageView fx:id="rotationDisk" fitHeight="232.0" fitWidth="300.0" layoutX="87.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@diskMotion.png" />

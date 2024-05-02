@@ -6,7 +6,7 @@ src: url('SamuraiBlast-YznGj.ttf');
 
 .controlButton{
 -fx-font-family:'Samurai Blast';
--fx-background-color: black;
+-fx-background-color: transparent;
 }
 
 .songTitle{
@@ -29,5 +29,11 @@ src: url('SamuraiBlast-YznGj.ttf');
 
 .welcomeTitle{
 -fx-font-family: 'Samurai Blast';
+}
+
+.timeLabel{
+-fx-font-family:'Samurai Blast';
+-fx-font-color: black;
+-fx-font-size: 14px;
 }
 
