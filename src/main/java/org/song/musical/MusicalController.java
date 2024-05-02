@@ -1,5 +1,6 @@
 package org.song.musical;
 
+import javafx.animation.RotateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -20,7 +22,10 @@ import java.util.List;
 public class MusicalController {
     private MediaPlayer mediaPlayer;
     private final ObservableList<String> playlist = FXCollections.observableArrayList();
+    private RotateTransition rotateTransition;
     public int nextIndex;
+    @FXML
+    private ImageView rotationDisk;
     @FXML
     private Button ForwardBtn;
     @FXML
@@ -71,6 +76,16 @@ public class MusicalController {
 
                                 mediaPlayer.play();
 
+                                rotateTransition = new RotateTransition(Duration.seconds(20), rotationDisk);
+
+                                rotateTransition.setByAngle(360); // Rotate by 360 degrees
+
+                                rotateTransition.setCycleCount(RotateTransition.INDEFINITE); // Repeat indefinitely
+
+                                rotateTransition.setAutoReverse(false); // Do not reverse the rotation
+
+                                rotateTransition.play();
+
                                 slider.setMin(0);
                                 slider.setMax(mediaPlayer.getTotalDuration().toSeconds());
 
@@ -97,8 +112,11 @@ public class MusicalController {
                             }
                         });
 
+
+
                         mediaPlayer.setOnEndOfMedia(() ->{
                             mediaPlayer.stop();
+                            rotateTransition.stop();
                             mediaPlayer.seek(Duration.seconds(0));
                         });
                     });
@@ -115,7 +133,8 @@ public class MusicalController {
                 if(selectedFile != null){
                     for(File file : selectedFile){
                         playlist.add(file.getAbsolutePath());
-                        //System.out.println(file.getPath());
+                        System.out.println(file.getName());
+                        System.out.println(playlist.size());
                     }
                 }
 
@@ -147,7 +166,15 @@ public class MusicalController {
 
                 mediaPlayer.play();
 
-                mediaPlayer.play();
+                rotateTransition = new RotateTransition(Duration.seconds(20), rotationDisk);
+
+                rotateTransition.setByAngle(360); // Rotate by 360 degrees
+
+                rotateTransition.setCycleCount(RotateTransition.INDEFINITE); // Repeat indefinitely
+
+                rotateTransition.setAutoReverse(false); // Do not reverse the rotation
+
+                rotateTransition.play();
 
                 slider.setMin(0);
 
@@ -185,6 +212,7 @@ public class MusicalController {
 
                 ForwardBtn.setOnAction(_ -> {
                     mediaPlayer.stop();
+                    rotateTransition.stop();
                     if(indexOfSongInPlaylist <= playlist.size() - 1){
                         playTheFuckingSong((indexOfSongInPlaylist + 1) % playlist.size());
 //                        System.out.println(songPath);
@@ -195,6 +223,7 @@ public class MusicalController {
 
                 BackwardBtn.setOnAction(_ -> {
                     mediaPlayer.stop();
+                    rotateTransition.stop();
                     if(indexOfSongInPlaylist > 0) {
                         playTheFuckingSong((indexOfSongInPlaylist - 1) % playlist.size());
                     }
@@ -216,6 +245,7 @@ public class MusicalController {
     void OnPauseButtonClick(ActionEvent event) {
         if(event.getSource() == pauseButton){
             mediaPlayer.pause();
+            rotateTransition.stop();
         }
     }
 
@@ -223,6 +253,7 @@ public class MusicalController {
     void OnPlayButtonClick(ActionEvent event) {
         if(event.getSource() == playButton){
             mediaPlayer.play();
+            rotateTransition.play();
         }
     }
 
@@ -230,6 +261,7 @@ public class MusicalController {
     void OnStopButtonClick(ActionEvent event) {
         if(event.getSource() == stopButton){
             mediaPlayer.stop();
+            rotateTransition.stop();
             mediaPlayer.seek(Duration.seconds(0));
         }
     }

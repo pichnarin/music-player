@@ -1,0 +1,33 @@
+@font-face{
+font-family: 'Samurai Blast';
+src: url('SamuraiBlast-YznGj.ttf');
+}
+
+
+.controlButton{
+-fx-font-family:'Samurai Blast';
+-fx-background-color: black;
+}
+
+.songTitle{
+-fx-font-family:'Samurai Blast';
+-fx-font-color: black;
+-fx-font-size: 14px;
+}
+
+.selectedAFile{
+-fx-font-family: 'Samurai Blast';
+-fx-background-color: black;
+-fx-font-color: white;
+}
+
+.selectedMultipleFile{
+-fx-font-family: 'Samurai Blast';
+-fx-background-color: black;
+-fx-font-color: white;
+}
+
+.welcomeTitle{
+-fx-font-family: 'Samurai Blast';
+}
+
